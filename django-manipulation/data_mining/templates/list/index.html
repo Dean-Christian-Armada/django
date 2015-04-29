@@ -1,0 +1,31 @@
+{% extends 'list/base.html' %}
+
+{% block title %} List Title {% endblock %}
+{% block body %}
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Name</th>
+					<th>Country</th>
+					<th>Gender</th>
+					<th>City</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for member in members %}
+				<tr>
+					<td>{{ member.title }}</td>
+					<td>{{ member.name }}</td>
+					<td>{{ member.country }}</td>
+					<td>{{ member.gender }}</td>
+					<td>{{ member.city }}</td>
+					<td><button type="button" class="btn btn-danger">Delete</button></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

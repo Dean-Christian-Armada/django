@@ -1,0 +1,81 @@
+{% load staticfiles %}
+{% load list_extras %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Membership App - {% block title %} Default {% endblock %}</title>
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" /></script>
+		<script type="text/javascript" src='http://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
+		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css">
+	</head>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="{% url 'list:index' %}">Membership App</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li class="text-center"><a href="#">Dashboard</a></li>
+	            <!-- <li><a href="#">Settings</a></li> -->
+	            <li><a href="{% url 'list:manual' %}">Manual</a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="container-fluid">
+	    	<div class="row">
+	    		<div class="col-sm-3 col-md-2 sidebar">
+		          <ul class="nav-sidebar" style="list-style-type: none">
+		            <li><button type="button" class="btn btn-primary add-btn">Add Member</button></li>
+		          </ul>
+		          <form>
+		            <input type="text" class="form-control" placeholder="Search...">
+		          </form>
+		        </div>
+		        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					{% block body %}
+						Empty Body
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+
+	{% bootstrap_javascript %}
+	<script>
+		$(function() {
+			$( "#dialog" ).dialog({
+				autoOpen: false,
+				modal: true
+			});
+			$(".add-btn").click(function(){
+				 $('#dialog').dialog('open');
+			})
+		});
+	</script>
+
+	<div id="dialog" title="Add a Member">
+		{# sample #}
+		<form method="post" action="">
+			{% csrf_token %}
+		</form>
+	</div>
+	</body>
+</html>
