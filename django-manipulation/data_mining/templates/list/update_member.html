@@ -4,3 +4,12 @@
 	{{ update_form.as_p }}
 	<button class="btn btn-primary {{ button }}-btn" data-cat-id="{{ id }}" name="{{ button }}">{{ button }}</button>
 </form>
+<script type="text/javascript">
+	$(".update-btn").click(function(){
+		alert('dean')
+		// id = $(this).attr('data-catid');
+		// $.get(update_url, { id: id }, function(data){
+		// 	$('.members').html(data);
+		// });
+	});
+</script>
