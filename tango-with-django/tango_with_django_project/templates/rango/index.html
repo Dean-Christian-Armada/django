@@ -22,7 +22,7 @@
 			{% if categories %}
 				<ul class="list-group">
 					{% for category in categories %}
-						<li class="list-group-item"><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+						<li class="list-group-item"><a href="{% url 'category' category.slug %}" >{{ category.name }}</a></li>
 					{% endfor %}
 				</ul>
 			{% else %}
@@ -39,7 +39,7 @@
 			{% if pages %}
 				<ul class="list-group">
 					{% for page in pages %}
-						<li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></li>
+						<li class="list-group-item"><a href="{{ page.url }}" target='_blank'>{{ page.title }}</a></li>
 					{% endfor %}
 				</ul>
 			{% else %}

@@ -94,3 +94,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.dialog-top{ top: 100px; }
+td .btn{ padding-top: 0px; padding-bottom: 0px }
+.btn{ text-transform: capitalize; }

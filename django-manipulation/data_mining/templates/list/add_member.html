@@ -1,0 +1,10 @@
+{% load bootstrap_toolkit %}
+<form class="form-horizontal" method="post" action="">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit" class="btn btn-primary add-btn" name="submit">Add</button>
+</form>
+<script type="text/javascript">
+	bool = {{ boolean }};
+	search_url = "{% url 'list:search_names' %}";
+</script>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
-import datetime
+import datetime, random, string
 
 # Create your models here.
 class Members(models.Model):
@@ -9,9 +9,14 @@ class Members(models.Model):
 			('M', 'Male'),
 			('F', 'Female'),
 		)
-
-	title = models.CharField(max_length = 5, null=True)
-	name = models.CharField(max_length=100, null=True)
+	TITLE_CHOICES = (
+			('Mr.', 'Mr.'),
+			('Ms.', 'Ms.'),
+			('Mrs.', 'Mrs.'),
+		)
+	code = models.CharField(max_length = 4, null = False, unique = True, editable = False)
+	title = models.CharField(max_length = 5, null=True, choices=TITLE_CHOICES)
+	name = models.CharField(max_length=100, null=True, unique=True)
 	# country = models.CharField(max_length=100, null=True)
 	country = CountryField()
 	gender = models.CharField(max_length=100, null=True, choices=GENDER_CHOICES)
@@ -21,9 +26,11 @@ class Members(models.Model):
 	date_modified = models.DateTimeField(editable=False, null=True)
 
 	def save(self, *args, **kwargs):
+		code = ''.join([random.choice(string.uppercase) for n in xrange(4)])
 		if not self.id:
 			self.created = datetime.datetime.today()
 		self.modified = datetime.datetime.today()
+		self.code = code
 		super(Members, self).save(*args, **kwargs)
 
 	def __unicode__(self):

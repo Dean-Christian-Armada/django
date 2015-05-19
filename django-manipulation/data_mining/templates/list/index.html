@@ -1,11 +1,13 @@
 {% extends 'list/base.html' %}
+{% load list_extras %}
 
 {% block title %} List Title {% endblock %}
 {% block body %}
-	<div class="table-responsive">
+	<div class="table-responsive members">
 		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th>Code</th>
 					<th>Title</th>
 					<th>Name</th>
 					<th>Country</th>
@@ -17,15 +19,27 @@
 			<tbody>
 				{% for member in members %}
 				<tr>
+					<td>{{ member.code }}</td>
 					<td>{{ member.title }}</td>
 					<td>{{ member.name }}</td>
 					<td>{{ member.country }}</td>
 					<td>{{ member.gender }}</td>
 					<td>{{ member.city }}</td>
-					<td><button type="button" class="btn btn-danger">Delete</button></td>
+					<td>
+						<button type="button" class="btn btn-warning update-form" data-catid='{{ member.id }}'>Update</button>
+						&nbsp; &nbsp;
+						<button type="button" class="btn btn-danger delete-btn" data-catid='{{ member.id }}'>Delete</button>
+					</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
+	<div id="update-dialog" >
+		
+	</div>
+	<script type="text/javascript">
+		delete_url = "{% url 'list:delete_member' %}";
+		update_form = "{% url 'list:update_form' %}";
+	</script>
 {% endblock %}

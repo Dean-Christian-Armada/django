@@ -29,7 +29,7 @@
 				<ul>
 					{% for page in pages %}
 						<li>
-							<a href="{% url 'goto' page.id %}">{{ page.title }}</a> ({{ page.views }}) Clicks
+							<a href="{% url 'goto' page.id %}" target='_blank'>{{ page.title }}</a> ({{ page.views }}) Clicks
 							{% if user.is_authenticated %}
 								<button data-pageid='{{page.id}}' data-catid='{{ category.id }}' class='rango-delete btn btn-mini btn-info'>Delete</button>
 							{% endif %}

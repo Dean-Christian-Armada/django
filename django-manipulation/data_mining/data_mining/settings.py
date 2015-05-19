@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django_countries',
     'jquery',
     'bootstrap3',
+    'bootstrap_toolkit',
 )
 
 MIDDLEWARE_CLASSES = (

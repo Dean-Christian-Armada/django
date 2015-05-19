@@ -14,7 +14,7 @@
 		catid = $(this).attr('data-catid');
 		pageid = $(this).attr('data-pageid');
 		// alert(pageid+' '+catid);
-		$.get('/rango/auto_delete_page/', { category_id: catid, page_id: pageid }, function(data){
+		$.get('/auto_delete_page/', { category_id: catid, page_id: pageid }, function(data){
 			// alert(data);
 			$('#pages').html(data);
 		});
