@@ -15,16 +15,6 @@ $(document).ready(function() {
 			$('.members').html(data);
 		});
 	});
-	// $("#id_name").click(function(){
-	// 	alert('dean');
-	// })
-	$(".update-btn").click(function(){
-		alert('dean')
-		// id = $(this).attr('data-catid');
-		// $.get(update_url, { id: id }, function(data){
-		// 	$('.members').html(data);
-		// });
-	});
 	$( "#dialog" ).dialog({
 		// bool variable found in add_member.html
 		autoOpen: bool,

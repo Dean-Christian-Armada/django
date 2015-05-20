@@ -1,6 +1,22 @@
 {% load bootstrap_toolkit %}
-<form class="form-horizontal" method="post" action="" id="update" onsubmit="return false;">
+<form class="form-horizontal" method="post" action="{% url 'list:update_form' %}" id="update">
 	{% csrf_token %}
 	{{ update_form.as_p }}
 	<button class="btn btn-primary {{ button }}-btn" data-cat-id="{{ id }}" name="{{ button }}">{{ button }}</button>
 </form>
+<script type="text/javascript">
+	$(".update-btn").click(function(){
+		// alert('dean')
+		// id = $(this).attr('data-catid');
+		code = $("input#id_code").val();
+		// alert(update_form);
+		$.post(update_form, { code: code }, function(data){
+			alert("dean");
+			// alert(data);
+			// $('.members').html(data);
+		});
+	});
+	// $("form#update").submit(function(){
+	// 	return false;
+	// });
+</script>

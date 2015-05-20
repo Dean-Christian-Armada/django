@@ -37,3 +37,18 @@
 	delete_url = "{% url 'list:delete_member' %}";
 	update_form = "{% url 'list:update_form' %}";
 </script>
+<script type="text/javascript">
+	$(".delete-btn").click(function(){
+		id = $(this).attr('data-catid');
+		$.get(delete_url, { id: id }, function(data){
+			$('.members').html(data);
+		});
+	});
+	$(".update-form").click(function(){
+		id = $(this).attr('data-catid');	
+		$.get(update_form, { update_id: id }, function(data){
+			$('#update-dialog').html(data);
+		});
+		setTimeout(function(){ $('#update-dialog').dialog('open'); }, 300);
+	});
+</script>

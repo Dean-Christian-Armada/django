@@ -2,9 +2,10 @@ from django import forms
 from .models import Members
 
 class MembersForm(forms.ModelForm):
+	password = forms.CharField(widget=forms.PasswordInput())
 	class Meta:
 		model = Members
-		fields = ('title', 'name', 'country', 'gender', 'city',)
+		fields = ('username','password','title', 'name', 'country', 'gender', 'city',)
 
 class MembersUpdate(forms.ModelForm):
 	code = forms.CharField(widget = forms.HiddenInput())

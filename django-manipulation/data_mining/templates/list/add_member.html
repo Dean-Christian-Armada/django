@@ -1,5 +1,5 @@
 {% load bootstrap_toolkit %}
-<form class="form-horizontal" method="post" action="">
+<form class="form-horizontal" method="post" action="{% url 'list:index' %}">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<button type="submit" class="btn btn-primary add-btn" name="submit">Add</button>

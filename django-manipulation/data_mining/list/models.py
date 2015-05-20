@@ -1,9 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
-import datetime, random, string
+import datetime, random, string, hashlib
 
 # Create your models here.
+class Userlevel(models.Model):
+	userlevel = models.CharField(max_length=50, null=True)
+	def __unicode__(self):
+		return self.userlevel
+
 class Members(models.Model):
 	GENDER_CHOICES = (
 			('M', 'Male'),
@@ -14,10 +19,12 @@ class Members(models.Model):
 			('Ms.', 'Ms.'),
 			('Mrs.', 'Mrs.'),
 		)
-	code = models.CharField(max_length = 4, null = False, unique = True, editable = False)
+	userlevel = models.ForeignKey(Userlevel, default=1)
+	code = models.CharField(max_length = 4, null = False, editable = False)
 	title = models.CharField(max_length = 5, null=True, choices=TITLE_CHOICES)
 	name = models.CharField(max_length=100, null=True, unique=True)
-	# country = models.CharField(max_length=100, null=True)
+	username = models.CharField(max_length=100, null= True, unique=True)
+	password = models.CharField(max_length=100, null=True)
 	country = CountryField()
 	gender = models.CharField(max_length=100, null=True, choices=GENDER_CHOICES)
 	city = models.CharField(max_length=100, null=True)
@@ -31,24 +38,30 @@ class Members(models.Model):
 			self.created = datetime.datetime.today()
 		self.modified = datetime.datetime.today()
 		self.code = code
+		self.password = hashlib.md5(self.password).hexdigest()
 		super(Members, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return self.name
 
-class Userlevel(models.Model):
-	userlevel = models.CharField(max_length=5, null=True)
+	class Meta:
+		verbose_name_plural = "Bio"
+
+class Marines(models.Model):
+	members = models.OneToOneField(Members)
+	picture = models.ImageField(upload_to='profile_images', blank=True)
+	cert_name = models.CharField(max_length=100, null=True)
+	cert_number = models.CharField(max_length=10, null=True)
+	date_issue = models.DateField(null=True)
+	date_expire = models.DateField(null=True)
 
 	def __unicode__(self):
-		return self.userlevel
+		return self.members.name
 
-class Users(models.Model):
-	user = models.OneToOneField(User)
-	userlevel = models.ForeignKey(Userlevel, default=1)
-	def __unicode__(self):
-		return self.user
+	class Meta:
+		verbose_name_plural = "Certificates"
 
 class Dashboard(models.Model):
-	user = models.ForeignKey(Users, default=1)
+	members = models.ForeignKey(Members, default=1)
 	activity = models.CharField(max_length=100, null=True)
 	description = models.CharField(max_length=100, null=True)
