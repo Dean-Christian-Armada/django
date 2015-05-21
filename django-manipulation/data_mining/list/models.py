@@ -24,7 +24,8 @@ class Members(models.Model):
 	title = models.CharField(max_length = 5, null=True, choices=TITLE_CHOICES)
 	name = models.CharField(max_length=100, null=True, unique=True)
 	username = models.CharField(max_length=100, null= True, unique=True)
-	password = models.CharField(max_length=100, null=True)
+	password = models.CharField(max_length=100, null=True )
+	old_password = models.CharField(max_length=100, null=True, editable=False)
 	country = CountryField()
 	gender = models.CharField(max_length=100, null=True, choices=GENDER_CHOICES)
 	city = models.CharField(max_length=100, null=True)
@@ -38,20 +39,31 @@ class Members(models.Model):
 			self.created = datetime.datetime.today()
 		self.modified = datetime.datetime.today()
 		self.code = code
-		self.password = hashlib.md5(self.password).hexdigest()
+		if self.old_password is None: 
+			self.password = hashlib.md5(self.password).hexdigest()
+			self.old_password = self.password
+		elif self.old_password != self.password:
+			self.password = hashlib.md5(self.password).hexdigest()
+			self.old_password = self.password
+		else:
+			pass
+		for field_name in ['name', 'city']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.title())
 		super(Members, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return self.name
-
+		
 	class Meta:
 		verbose_name_plural = "Bio"
 
 class Marines(models.Model):
 	members = models.OneToOneField(Members)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
-	cert_name = models.CharField(max_length=100, null=True)
-	cert_number = models.CharField(max_length=10, null=True)
+	cert_name = models.CharField(max_length=100, default='N/A')
+	cert_number = models.CharField(max_length=20, default='N/A')
 	date_issue = models.DateField(null=True)
 	date_expire = models.DateField(null=True)
 

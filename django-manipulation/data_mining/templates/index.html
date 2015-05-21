@@ -11,6 +11,7 @@
 <body>
 	<div class="container">
 		<!-- <h1 style="text-align: center">Wrong username or password!</h1> -->
+		<h1><center>{% autoescape on %}{{ message }}{% endautoescape %}</center></h1>
 		<div class="login-container">
 				<h3>Manship Bio App</h3>
 				<div id = "form-box" class="form-box">

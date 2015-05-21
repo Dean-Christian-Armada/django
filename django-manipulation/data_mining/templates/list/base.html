@@ -18,7 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.structure.min.css">
 	</head>
 	<body>
-		<div id="dialog" title="Add a Member">
+		<div id="dialog" title="Add a Marine">
 			{% sample %}
 		</div>
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -36,6 +36,7 @@
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="#">Dashboard</a></li>
 	            <li><a href="#">Settings</a></li>
+	            <li><a href="{% url 'list:recycle_bin' %}">Recycle Bin</a></li>
 	            <li><a href="{% url 'list:manual' %}">Manual</a></li>
 	            <li><a href="{% url 'logout' %}">Logout</a></li>
 	          </ul>
@@ -66,7 +67,8 @@
 		var search_url; // value decleared in ____ & used for searching the names
 		var update_url; // value declared in index.html
 		var title; // title of the update-dialog can be seen in the scripts.js
-		var update_form // value declared to populate the form tag and for updating
+		var update_form; // value declared to populate the form tag and for updating
+		var size;
 	</script>
 	</body>
 </html>

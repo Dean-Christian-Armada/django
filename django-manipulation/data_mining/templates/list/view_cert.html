@@ -1,9 +1,5 @@
-{% extends 'guests/base.html' %}
 {% load staticfiles %}
-
-{% block title %} Index {% endblock %}
-{% block body %}
-	<div class="container">
+<div class="container">
     	<div class = "cert-border">
 			<div class="container">
 				  <img class="img-responsive spacer center-block" src="{% static 'images/logo-manship.png' %}" alt="">
@@ -12,28 +8,27 @@
 						<p class="text-uppercase spacer" style="font-size: 26px;">
 							<i>Certificate of Seaman is awarded to</i>
 						</p>
-						<img class="img-responsive spacer center-block"  src="{% if not marine.picture %}http://placehold.it/300x200{% else %}{{MEDIA_URL}}{{ marine.picture }}{% endif %}" width="300px">
+						<img class="img-responsive spacer center-block"  src="{% if not marines.picture %}http://placehold.it/300x200{% else %}{{MEDIA_URL}}{{ marines.picture }}{% endif %}" width="300px">
 						<p class="spacer" style="font-size: 26px;">
-							<b>{{ request.session.name }}</b>
+							<b>{{ members.name }}</b>
 						</p>
 					</div>
 					<!-- lower -->
 					<div class="row spacer" id="details">
 						<div class="col-sm-6 just-right">
-							<p>Certification Name: <b>{{ marine.cert_name }}</b></p>
+							<p>Certification Name: <b>{{ marines.cert_name }}</b></p>
 						</div>
 						<div class="col-sm-6">
-							<p>Certification Number: <b>{{ marine.cert_number }}</b></p>
+							<p>Certification Number: <b>{{ marines.cert_number }}</b></p>
 						</div>
 						<div class="col-sm-6 just-right">
-							<p>Date Issue: <b>{{ marine.date_issue }}</b></p>
+							<p>Date Issue: <b>{{ marines.date_issue }}</b></p>
 						</div>
 						<div class="col-sm-6">
-							<p>Date Expire: <b>{{ marine.date_expire }}</b></p>
+							<p>Date Expire: <b>{{ marines.date_expire }}</b></p>
 						</div>
 					</div>
 			</div>
 		
 		</div>
   	</div>
-{% endblock %}

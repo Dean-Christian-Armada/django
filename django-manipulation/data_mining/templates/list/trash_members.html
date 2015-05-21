@@ -20,9 +20,9 @@
 			<td>{{ member.gender }}</td>
 			<td>{{ member.city }}</td>
 			<td>
-				<button type="button" class="btn btn-warning update-form" data-catid='{{ member.id }}'>Update</button>
+				<button type="button" class="btn btn-danger delete-btn" data-catid='{{ member.id }}'>Delete</button>
 				&nbsp; &nbsp;
-				<button type="button" class="btn btn-danger recycle-btn" data-catid='{{ member.id }}'>Move to Trash</button>
+				<button type="button" class="btn btn-success restore-btn" data-catid='{{ member.id }}'>Restore</button>
 				&nbsp; &nbsp;
 				<button type="button" class="btn btn-info view-cert" data-catid='{{ member.id }}'>View Certificate</button>
 				&nbsp; &nbsp;
@@ -32,31 +32,20 @@
 		{% endfor %}
 	</tbody>
 </table>
-
-<div id="update-dialog" >
-	
-</div>
 <div id='view-cert'>
-		
+
 </div>
 <script type="text/javascript">
-	trash_url = "{% url 'list:trash' %}";
-	update_form = "{% url 'list:update_form' %}";
+	delete_url = "{% url 'list:delete_member' %}";
 	cert_url = "{% url 'list:view_cert' %}";
+	restore_url = "{% url 'list:restore_member' %}";
 </script>
 <script type="text/javascript">
-	$(".recycle-btn").click(function(){
+	$(".delete-btn").click(function(){
 		id = $(this).attr('data-catid');
-		$.get(trash_url, { id: id }, function(data){
+		$.get(delete_url, { id: id }, function(data){
 			$('.members').html(data);
 		});
-	});
-	$(".update-form").click(function(){
-		id = $(this).attr('data-catid');	
-		$.get(update_form, { update_id: id }, function(data){
-			$('#update-dialog').html(data);
-		});
-		setTimeout(function(){ $('#update-dialog').dialog('open'); }, 300);
 	});
 	$(".view-cert").click(function(){
 		width = 900; height = 600;
@@ -92,12 +81,11 @@
 			draggable: false,
 		});
 	});
-	$( "#update-dialog" ).dialog({
-		autoOpen: false,
-		modal: true,
-		width: 'auto',
-		closeOnEscape: true,
-		draggable: false,
+	$(".restore-btn").click(function(){
+		id = $(this).attr('data-catid');
+		$.get(restore_url, { id: id }, function(data){
+			$('.members').html(data);
+		});
 	});
 	$( "#view-cert" ).dialog({
 		autoOpen: false,

@@ -4,7 +4,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+  padding-top: 50px; letter-spacing: 0.01rem;
 }
 
 
@@ -205,3 +205,17 @@ td .btn{ padding-top: 0px; padding-bottom: 0px }
   animation-fill-mode: both;
 }
 /* end login */
+.spacer {
+  margin-bottom: 26px;
+}
+@media only screen and (max-width: 767px) {
+  #details {
+    text-align: center;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .just-right {
+    text-align: right;
+  }
+}
+.cert-border{ border: 16px double #06c; padding-top: 26px; }

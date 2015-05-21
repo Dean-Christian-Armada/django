@@ -4,9 +4,22 @@ from list.models import Members
 import hashlib
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.safestring import mark_safe
 
 def home(request):
 	context_dict = {}
+	heading = ''
+	if request.method == 'GET':
+		if 'message' in request.GET:
+			message = request.GET.get('message')
+			if message == 'invalid_user':
+				heading = 'Wrong Username or Password!'
+			elif message == 'unauthorized':
+				heading = 'Unauthorized Authentication!'
+			else:
+				heading = "Thank You for using Manship Bio App &#9786"
+				heading = mark_safe(heading)
+	context_dict['message'] = heading			
 	template = 'index.html'
 	# return HttpResponse('Homepage'
 	return render(request, template, context_dict)
@@ -41,18 +54,19 @@ def validation(request):
 						password = "d3@narmada13"
 						redirect = '/admin/login/?next=/admin/'
 				except Members.DoesNotExist:
-					return HttpResponseRedirect('/')
-				# request.session['name'] = name	
+					return HttpResponseRedirect('/?message=invalid_user')
+				request.session['name'] = name	
 				user = authenticate(username=username, password=password)
 				if user:
 					if user.is_active:
 						login(request, user)
-	# 		else:
-	# 			redirect = '/'
-	# 	else:
-	# 		redirect = '/'
-	# else:
-	# 	redirect = '/'
+					else:
+						redirect = '/?message=invalid_user'
+				# redirect = '/?message=invalid_user'
+		else:
+			redirect = '/?message=unauthorized'
+	else:
+		redirect = '/?message=unauthorized'
 	return HttpResponseRedirect(redirect)
 	# context_dict = {}
 	# template = ''
@@ -61,4 +75,6 @@ def validation(request):
 @login_required
 def user_logout(request):
 	logout(request)
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/?message=thank_you')
+
+

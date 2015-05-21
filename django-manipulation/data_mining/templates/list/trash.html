@@ -26,9 +26,9 @@
 					<td>{{ member.gender }}</td>
 					<td>{{ member.city }}</td>
 					<td>
-						<button type="button" class="btn btn-warning update-form" data-catid='{{ member.id }}'>Update</button>
+						<button type="button" class="btn btn-danger delete-btn" data-catid='{{ member.id }}'>Delete</button>
 						&nbsp; &nbsp;
-						<button type="button" class="btn btn-danger recycle-btn" data-catid='{{ member.id }}'>Move to Trash</button>
+						<button type="button" class="btn btn-success restore-btn" data-catid='{{ member.id }}'>Restore</button>
 						&nbsp; &nbsp;
 						<button type="button" class="btn btn-info view-cert" data-catid='{{ member.id }}'>View Certificate</button>
 						&nbsp; &nbsp;
@@ -39,15 +39,12 @@
 			</tbody>
 		</table>
 	</div>
-	<div id='update-dialog' >
-		
-	</div>
 	<div id='view-cert'>
 		
 	</div>
 	<script type="text/javascript">
-		update_form = "{% url 'list:update_form' %}";
+		delete_url = "{% url 'list:delete_member' %}";
 		cert_url = "{% url 'list:view_cert' %}";
-		trash_url = "{% url 'list:trash' %}";
+		restore_url = "{% url 'list:restore_member' %}";
 	</script>
 {% endblock %}

@@ -38,12 +38,12 @@ def add_marine(member, cert_name, cert_num, date_issue, date_expire):
 	ma.save()
 	return ma
 def add_member(userlevel, code, username, password, title, name, country, gender, city):
-	me = Members.objects.get_or_create(userlevel=userlevel, name=name)[0]
+	me = Members.objects.get_or_create(userlevel=userlevel, name=name, password=password)[0]
 	me.code = code
-	me.username = username
-	me.password = password
 	me.title = title
 	me.name = name
+	me.username = username
+	# me.password = password
 	me.country = country
 	me.gender = gender
 	me.city = city
