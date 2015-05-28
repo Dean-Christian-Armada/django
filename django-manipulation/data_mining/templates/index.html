@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Membership Bio App - LogIn Page</title>
+	{% bootstrap_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+	<div class="container">
+		<!-- <h1 style="text-align: center">Wrong username or password!</h1> -->
+		<h1><center>{% autoescape on %}{{ message }}{% endautoescape %}</center></h1>
+		<div class="login-container">
+				<h3>Manship Bio App</h3>
+				<div id = "form-box" class="form-box">
+					<form action="{% url 'validation' %}" method="POST">
+						{% csrf_token %}
+						<input type = "text" name = "username" placeholder="Username" required>
+						<input type="password" name = "password" placeholder="Password" required>
+						<button id="btn-info" class="btn btn-info btn-block login" type="submit">Login</button>
+					</form>
+				</div>
+			</div>
+	</div>
+</body>
+</html>

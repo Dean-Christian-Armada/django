@@ -1,0 +1,96 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Title</th>
+			<th>Name</th>
+			<th>Country</th>
+			<th>Gender</th>
+			<th>City</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for member in members %}
+		<tr>
+			<td>{{ member.code }}</td>
+			<td>{{ member.title }}</td>
+			<td>{{ member.name }}</td>
+			<td>{{ member.country }}</td>
+			<td>{{ member.gender }}</td>
+			<td>{{ member.city }}</td>
+			<td>
+				<button type="button" class="btn btn-danger delete-btn" data-catid='{{ member.id }}'>Delete</button>
+				&nbsp; &nbsp;
+				<button type="button" class="btn btn-success restore-btn" data-catid='{{ member.id }}'>Restore</button>
+				&nbsp; &nbsp;
+				<button type="button" class="btn btn-info view-cert" data-catid='{{ member.id }}'>View Certificate</button>
+				&nbsp; &nbsp;
+				<button type="button" class="btn btn-info view-cert-info" data-catid='{{ member.id }}'>View Certification Info</button>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id='view-cert'>
+
+</div>
+<script type="text/javascript">
+	delete_url = "{% url 'list:delete_member' %}";
+	cert_url = "{% url 'list:view_cert' %}";
+	restore_url = "{% url 'list:restore_member' %}";
+</script>
+<script type="text/javascript">
+	$(".delete-btn").click(function(){
+		id = $(this).attr('data-catid');
+		$.get(delete_url, { id: id }, function(data){
+			$('.members').html(data);
+		});
+	});
+	$(".view-cert").click(function(){
+		width = 900; height = 600;
+		id = $(this).attr('data-catid');
+		$.get(cert_url, { id: id }, function(data){
+			$('#view-cert').html(data);
+		});
+		setTimeout(function(){ $('#view-cert').dialog('open'); }, 300);
+
+		$( "#view-cert" ).dialog({
+			autoOpen: false,
+			modal: true,
+			width: width,
+			height: height,
+			closeOnEscape: true,
+			draggable: false,
+		});
+	});
+	$(".view-cert-info").click(function(){
+		width = 'auto'; height = 'auto';
+		id = $(this).attr('data-catid');
+		info = "info";
+		$.get(cert_url, { id: id, info: info }, function(data){
+			$('#view-cert').html(data);
+		});
+		setTimeout(function(){ $('#view-cert').dialog('open'); }, 300);
+		$( "#view-cert" ).dialog({
+			autoOpen: false,
+			modal: true,
+			width: width,
+			height: height,
+			closeOnEscape: true,
+			draggable: false,
+		});
+	});
+	$(".restore-btn").click(function(){
+		id = $(this).attr('data-catid');
+		$.get(restore_url, { id: id }, function(data){
+			$('.members').html(data);
+		});
+	});
+	$( "#view-cert" ).dialog({
+		autoOpen: false,
+		modal: true,
+		closeOnEscape: true,
+		draggable: false,
+	});
+</script>

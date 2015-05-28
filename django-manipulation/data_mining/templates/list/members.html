@@ -1,0 +1,108 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Title</th>
+			<th>Name</th>
+			<th>Country</th>
+			<th>Gender</th>
+			<th>City</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for member in members %}
+		<tr>
+			<td>{{ member.code }}</td>
+			<td>{{ member.title }}</td>
+			<td>{{ member.name }}</td>
+			<td>{{ member.country }}</td>
+			<td>{{ member.gender }}</td>
+			<td>{{ member.city }}</td>
+			<td>
+				<button type="button" class="btn btn-warning update-form" data-catid='{{ member.id }}'>Update</button>
+				&nbsp; &nbsp;
+				<button type="button" class="btn btn-danger recycle-btn" data-catid='{{ member.id }}'>Move to Trash</button>
+				&nbsp; &nbsp;
+				<button type="button" class="btn btn-info view-cert" data-catid='{{ member.id }}'>View Certificate</button>
+				&nbsp; &nbsp;
+				<button type="button" class="btn btn-info view-cert-info" data-catid='{{ member.id }}'>View Certification Info</button>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<div id="update-dialog" >
+	
+</div>
+<div id='view-cert'>
+		
+</div>
+<script type="text/javascript">
+	trash_url = "{% url 'list:trash' %}";
+	update_form = "{% url 'list:update_form' %}";
+	cert_url = "{% url 'list:view_cert' %}";
+</script>
+<script type="text/javascript">
+	$(".recycle-btn").click(function(){
+		id = $(this).attr('data-catid');
+		$.get(trash_url, { id: id }, function(data){
+			$('.members').html(data);
+		});
+	});
+	$(".update-form").click(function(){
+		id = $(this).attr('data-catid');	
+		$.get(update_form, { update_id: id }, function(data){
+			$('#update-dialog').html(data);
+		});
+		setTimeout(function(){ $('#update-dialog').dialog('open'); }, 300);
+	});
+	$(".view-cert").click(function(){
+		width = 900; height = 600;
+		id = $(this).attr('data-catid');
+		$.get(cert_url, { id: id }, function(data){
+			$('#view-cert').html(data);
+		});
+		setTimeout(function(){ $('#view-cert').dialog('open'); }, 300);
+
+		$( "#view-cert" ).dialog({
+			autoOpen: false,
+			modal: true,
+			width: width,
+			height: height,
+			closeOnEscape: true,
+			draggable: false,
+		});
+	});
+	$(".view-cert-info").click(function(){
+		width = 'auto'; height = 'auto';
+		id = $(this).attr('data-catid');
+		info = "info";
+		$.get(cert_url, { id: id, info: info }, function(data){
+			$('#view-cert').html(data);
+		});
+		setTimeout(function(){ $('#view-cert').dialog('open'); }, 300);
+		$( "#view-cert" ).dialog({
+			autoOpen: false,
+			modal: true,
+			width: width,
+			height: height,
+			closeOnEscape: true,
+			draggable: false,
+		});
+	});
+	$( "#update-dialog" ).dialog({
+		autoOpen: false,
+		modal: true,
+		width: 'auto',
+		closeOnEscape: true,
+		draggable: false,
+	});
+	$( "#view-cert" ).dialog({
+		autoOpen: false,
+		modal: true,
+		closeOnEscape: true,
+		draggable: false,
+	});
+</script>

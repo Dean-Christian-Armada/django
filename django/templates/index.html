@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Welcome to my blog{% endblock %}
+
+{% block content %}
+	{% if posts %}
+		{% for post in posts %}
+			<h2 class="blog-post-title">{{ post.title }}</h2>
+<!-- 			<p class="blog-post-meta">Added on {{ post.posted }} from <a href="#">{{ post.author }}</a></p>
+ -->
+			<p>{{ post.body }}</p>
+			<p>By: <i><a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></i></p>
+			<p>Category: <i><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></i></p>
+		{% endfor %}
+	{% endif %}
+{% endblock %}

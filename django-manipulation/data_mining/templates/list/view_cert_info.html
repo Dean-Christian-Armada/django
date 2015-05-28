@@ -1,0 +1,22 @@
+<table class="table table-striped">
+	<thead>
+		
+		<tr><!-- http://placehold.it/300x300 -->
+			<th colspan="2"><img src="{% if not marines.picture %}http://placehold.it/300x200{% else %}{{MEDIA_URL}}{{ marines.picture }}{% endif %}" width="300px"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Certification Name:</th><td><b>{{ marines.cert_name }}</b></td>
+		</tr>
+		<tr>
+			<th>Certification Number:</th><td><b>{{ marines.cert_number }}</b></td>
+		</tr>
+		<tr>
+			<th>Date Issue:</th><td><b>{{ marines.date_issue }}</b></td>
+		</tr>
+		<tr>
+			<th>Date Expire:</th><td><b>{{ marines.date_expire }}</b></td>
+		</tr>
+	</tbody>
+</table>

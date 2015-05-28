@@ -1,0 +1,7 @@
+{% load bootstrap_toolkit %}
+<form class="form-horizontal" method="post" action="{% url 'list:update_form' %}" id="update" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ update_form.as_p }}
+	{{ update_marine_form.as_p }}
+	<button class="btn btn-primary {{ button }}-btn" data-cat-id="{{ id }}" name="{{ button }}">{{ button }}</button>
+</form>

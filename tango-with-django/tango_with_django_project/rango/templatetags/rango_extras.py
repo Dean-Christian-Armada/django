@@ -1,0 +1,10 @@
+from django import template
+from rango.models import Category
+from django.http import HttpResponse
+
+register = template.Library()
+
+
+@register.inclusion_tag('cats.html')
+def get_category_list(cat=None):
+	return {'cats': Category.objects.all(), 'act_cat': cat }

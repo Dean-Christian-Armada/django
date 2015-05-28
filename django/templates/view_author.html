@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block head_title %}Viewing author {{ author.title }} {% endblock %}
+{% block title %}{{ author.title }}{% endblock %}
+
+{% block content %}
+	{% if posts %}
+		{% for post in posts %}
+			<!-- <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li> -->
+			<h2 class="blog-post-title">{{ post.title }}</h2>
+			<p>{{ post.body }}</p>
+			<p>Category: <i><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></i></p>
+		{% endfor %}	
+	{% else %}
+		<p>There are no posts</p>
+	{% endif %}
+{% endblock %}

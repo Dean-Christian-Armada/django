@@ -1,0 +1,22 @@
+<ul>
+	{% for page in pages %}
+		<li>
+			<a href="{% url 'goto' page.id %}">{{ page.title }}</a> ({{ page.views }}) 
+			<button data-pageid='{{page.id}}' data-catid='{{ page.category.id }}' class='rango-delete btn btn-mini btn-info'>Delete</button>
+			<br /> &nbsp;
+		</li>
+	{% endfor %}
+</ul>
+<script type="text/javascript">
+	$('.rango-delete').click(function(){
+		var pageid;
+		var catid;
+		catid = $(this).attr('data-catid');
+		pageid = $(this).attr('data-pageid');
+		// alert(pageid+' '+catid);
+		$.get('/auto_delete_page/', { category_id: catid, page_id: pageid }, function(data){
+			// alert(data);
+			$('#pages').html(data);
+		});
+	});
+</script>

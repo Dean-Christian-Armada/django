@@ -1,0 +1,35 @@
+Objective:
+	An online database web-app
+
+Initial Requirements:
+	Can Manipulate data
+		- add
+		- update
+		- delete
+		- upload
+
+Technologies used:
+	Python/Django
+	Javascript/Jquery
+	CSS/Bootstrap
+
+Problems Encountered:
+Django:
+	Templatetags - passing a request
+		Solution: Use a context
+					- @register.inclusion_tag('list/add_member.html', takes_context=True)
+						def sample(context):
+							request = context['request']
+Jquery:
+	Dialog UI - top position
+		Solution: Put the bootstrap external resource inside the head tag
+	Dialog UI - 'x' button not showing
+		Solution: Be sure that the bootstrap js comest first before the ui
+Bootstrap:
+
+Techniques Learned:
+	'closeOnEscape: true,' on Jquery UI Dialog
+	'resizable: false,'	on Jquery UI Dialog
+	'django variables can be passed through external js by declaring a variable on different script tags'
+	var javascript tricks, place it in the end
+	get_FOO_display(), get original value from choices
