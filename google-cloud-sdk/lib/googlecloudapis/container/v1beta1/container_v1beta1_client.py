@@ -179,11 +179,11 @@ class ContainerV1beta1(base_api.BaseApiClient):
           }
 
     def Create(self, request, global_params=None):
-      """Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes master instance.
+      """Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes main instance.
 
 The cluster is created in the project's default network.
 
-A firewall is added that allows traffic into port 443 on the master, which enables HTTPS. A firewall and a route is added for each node to allow the containers on that node to communicate with all other instances in the cluster.
+A firewall is added that allows traffic into port 443 on the main, which enables HTTPS. A firewall and a route is added for each node to allow the containers on that node to communicate with all other instances in the cluster.
 
 Finally, a route named k8s-iproute-10-xx-0-0 is created to track that the cluster's 10.xx.0.0/16 CIDR has been assigned.
 
@@ -198,7 +198,7 @@ Finally, a route named k8s-iproute-10-xx-0-0 is created to track that the cluste
           config, request, global_params=global_params)
 
     def Delete(self, request, global_params=None):
-      """Deletes the cluster, including the Kubernetes master and all worker nodes.
+      """Deletes the cluster, including the Kubernetes main and all worker nodes.
 
 Firewalls and routes that were configured at cluster creation are also deleted.
 
@@ -312,10 +312,10 @@ Firewalls and routes that were configured at cluster creation are also deleted.
           'Get': base_api.ApiMethodInfo(
               http_method=u'GET',
               method_id=u'container.projects.zones.tokens.get',
-              ordered_params=[u'masterProjectId', u'zoneId', u'projectNumber', u'clusterName'],
-              path_params=[u'clusterName', u'masterProjectId', u'projectNumber', u'zoneId'],
+              ordered_params=[u'mainProjectId', u'zoneId', u'projectNumber', u'clusterName'],
+              path_params=[u'clusterName', u'mainProjectId', u'projectNumber', u'zoneId'],
               query_params=[],
-              relative_path=u'projects/{masterProjectId}/zones/{zoneId}/tokens/{projectNumber}/{clusterName}',
+              relative_path=u'projects/{mainProjectId}/zones/{zoneId}/tokens/{projectNumber}/{clusterName}',
               request_field='',
               request_type_name=u'ContainerProjectsZonesTokensGetRequest',
               response_type_name=u'Token',
@@ -328,7 +328,7 @@ Firewalls and routes that were configured at cluster creation are also deleted.
 
     def Get(self, request, global_params=None):
       """Gets a compute-rw scoped OAuth2 access token for.
-. Authentication is performed to ensure that the caller is a member of  and that the request is coming from the expected master VM for the specified cluster. See go/gke-cross-project-auth for more details.
+. Authentication is performed to ensure that the caller is a member of  and that the request is coming from the expected main VM for the specified cluster. See go/gke-cross-project-auth for more details.
 
       Args:
         request: (ContainerProjectsZonesTokensGetRequest) input message
