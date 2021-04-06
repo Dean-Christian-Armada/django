@@ -17,7 +17,7 @@ django-bootstrap-toolkit==2.15.0
 django-bootstrap3==5.4.0
 django-countries==3.3
 django-jquery==1.9.1
-django-registration==1.0
+django-registration==3.1.2
 django-registration-redux==1.2
 django-selectable==0.9.0
 duplicity==0.6.23
