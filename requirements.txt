@@ -21,7 +21,7 @@ django-registration==1.0
 django-registration-redux==1.2
 django-selectable==0.9.0
 duplicity==0.6.23
-html5lib==0.999
+html5lib==0.99999999
 httplib2==0.8
 lockfile==0.8
 lxml==3.3.3
